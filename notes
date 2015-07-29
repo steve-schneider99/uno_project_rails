@@ -1,0 +1,55 @@
+player_id column on Card objects tells what that currently belongs to.
+ - number = the id of the player for that game. Card is in the player's hand.
+ - number + 1 = the id of the computer opponent for that game. Card is in the opponent's hand.
+ - -0 = draw pile id. The card is currently in the draw pile.
+ - -1 = discard pile id. The card has been discarded and is not the current face up card.
+  - -2 = the current face up card. Is changed to -1 once a card moves from the draw pile to the current face up card.
+
+In-game complete list:
+ 1. Create buttons to allow player to play a card(maybe set button to show only if the card is an option based on what the draw_pile_card currently is).
+  - card must match either number or color, or be a wild card(wilds implemented later)
+  - card will be removed from player hand(change player_id) and changed to draw_pile_card.
+  - current draw_pile_card will be changed to discard pile.
+  - current_turn will change to opponent.
+
+
+
+Player cards will be an array. Initial game setup may have randomized elements for the 7 cards, but should have 4-5 number cards, 2 special cards.
+
+New Game:
+1. Load the arrays for deck cards.
+2. For the player, pick 5 number cards and 2 special cards. Push these cards into player cards array, remove them from the arrays they originated from.
+3. For each opponent picked from drop down list, pick 5 number cards and 2 special cards. Push these cards into opponent cards array(distinction between different opponents), remove them from the arrays they originated from.
+4. Pick a number card and push it into the discard pile display, remove it from the array it originated from.
+5. Combine remaining deck arrays into one array(for pulling random cards for the draw deck)
+
+Deck Cards Arrays
+  Wild Cards
+    *wild cards in deck. wc = wild color(x4), wf = wild draw four(x4)
+    wild_cards = ["wc", "wc", "wc", "wc", "wf", "wf", "wf", "wf"]
+
+  Number Cards
+    *red number cards in deck. letter = red, # = number. x2 for all, "0" x1
+    red_numbers = ["r0", "r1", "r1", "r2", "r2", "r3", "r3", "r4", "r4", "r5", "r5", "r6", "r6", "r7", "r7", "r8", "r8", "r9", "r9"]
+
+    *green number cards ""
+    green_numbers = ["g0", "g1", "g1", "g2", "g2", "g3", "g3", "g4", "g4", "g5", "g5", "g6", "g6", "g7", "g7", "g8", "g8", "g9", "g9"]
+
+    *blue number cads ""
+    blue_numbers = ["b0", "b1", "b1", "b2", "b2", "b3", "b3", "b4", "b4", "b5", "b5", "b6", "b6", "b7", "b7", "b8", "b8", "b9", "b9"]
+
+    *yellow number cards ""
+    yellow_cards = ["y0", "y1", "y1", "y2", "y2", "y3", "y3", "y4", "y4", "y5", "y5", "y6", "y6", "y7", "y7", "y8", "y8", "y9", "y9"]
+
+  Special Cards
+    *special cards in deck for red. letter = color, 2nd letter = type. 2x each. Types: d = draw two, s = skip, v = reverse
+    red_specials = ["rd", "rd", "rs", "rs", "rv", "rv"]
+
+    *green special cards
+    green_specials = ["gd", "gd", "gs", "gs", "gv", "gv"]
+
+    *blue special cards
+    blue_specials = ["bd", "bd", "bs", "bs", "bv", "bv"]
+
+    *yellow special cards
+    yellow_specials = ["yd", "yd", "ys", "ys", "yv", "yv"]

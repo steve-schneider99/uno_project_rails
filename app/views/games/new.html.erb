@@ -1,0 +1,7 @@
+<h1>New Game Page</h1>
+
+<%= form_for @game do |f| %>
+  <%= f.label :player_name %>
+  <%= f.text_area :player_name %>
+  <%= f.submit "Start Game" %>
+<% end %>

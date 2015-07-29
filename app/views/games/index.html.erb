@@ -1,0 +1,14 @@
+<h1>Games</h1>
+
+<% if @games.any? %>
+  <h3>Game currently being played</h3>
+  <ul>
+    <% @games.each do |game| %>
+      <li><%= link_to game.player_name, game_path(game) %> | <%= game.draw_pile_remaining %> cards remaining</li>
+      <%= link_to "Reset Current Game", reset_game_path(game) %> |||
+      <%= link_to "Delete Current Game", game_path(game), :method => 'delete' %>
+    <% end %>
+  </ul>
+<% else %>
+  <%= link_to "Start a new game", new_game_path %>
+<% end %>
