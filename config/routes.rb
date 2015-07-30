@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root :to => 'games#index'
 
+  resources :cards
+
   resources :games do
     resources :players
     resources :cards

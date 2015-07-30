@@ -1,25 +1,40 @@
+<%= link_to "Back to Index", games_path %>
+
 <div class="row">
-  <div class="col-sm-3">
-<h3>Game Vals</h3>
-Player Name: <%= @game.player_name %>
-<br>
-Current Turn: <%= @game.current_turn %>
-<br>
-Draw Pile Remaining: <%= @game.draw_pile_remaining %>
-<br>
-Draw Pile Card: <%= @game.draw_pile_card %>
-</div>
-<div class="col-sm-4 col-offset-4">
-<h3>Player Vals</h3>
-<% if @players.any? %>
-<ul>
-  <% @players.each do |player|%>
-    <li>Player Name: <%= player.player_name %></li>
-  <% end %>
-</ul>
-<% end %>
-<br>
-</div>
+  <div class="col-sm-4">
+    <h3>Game Vals</h3>
+    Player Name: <%= @game.player_name %>
+    <br>
+    Current Turn: <%= @game.current_turn %>
+    <br>
+    Draw Pile Remaining: <%= @game.draw_pile_remaining %>
+    <br>
+    Draw Pile Card: <%= @game.draw_pile_card %>
+  </div>
+
+  <div class="col-sm-4">
+    <h3>Draw Pile Card</h3>
+    <% @draw_card.each do |card| %>
+      <% if card.card_type == "number" %>
+        <%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
+      <% elsif card.card_type == "special" %>
+        <%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
+      <% else %>
+        <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-4">
+    <h3>Player Vals</h3>
+    <% if @players.any? %>
+      <ul>
+        <% @players.each do |player|%>
+          <li>Player Name: <%= player.player_name %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <br>
+  </div>
 </div>
 
 <h3>Card Vals</h3>
@@ -27,31 +42,41 @@ Draw Pile Card: <%= @game.draw_pile_card %>
 <br>
 <div class="row">
   <div class="col-sm-6">
-<i>Player Cards</i>
-<% if @player_cards.any? %>
-  <ul>
-    <% @player_cards.each do |card| %>
-      <% if card.card_type == "number" %>
-        <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li>
-      <% else %>
-        <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li>
-      <% end %>
+    <i>Player Cards</i>
+    <% if @player_cards.any? %>
+      <ul>
+        <% @player_cards.each do |card| %>
+          <% if card.card_type == "number" %>
+            <li><%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
+            <!-- <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li> -->
+          <% else %>
+            <li><%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
+            <!-- <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li> -->
+          <% end %>
+          <% if card.color == @draw_card.first.color || card.number == @draw_card.first.number || card.card_action != nil && card.card_action == @draw_card.first.card_action %>
+            <%= link_to "Play", card_path(card), :method => :put %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-<br>
-</div>
-<div class="col-sm-6">
-<i>Opponent Cards</i>
-<% if @opponent_cards.any? %>
-  <ul>
-    <% @opponent_cards.each do |card| %>
-      <% if card.card_type == "number" %>
-        <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li>
-      <% else %>
-        <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li>
-      <% end %>
+    <br>
+  </div>
+
+  <div class="col-sm-6">
+    <i>Opponent Cards</i>
+    <% if @opponent_cards.any? %>
+      <ul>
+        <% @opponent_cards.each do |card| %>
+          <% if card.card_type == "number" %>
+            <%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
+            <!-- <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li> -->
+          <% else %>
+            <%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
+            <!-- <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li> -->
+          <% end %>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
+  </div>
 </div>

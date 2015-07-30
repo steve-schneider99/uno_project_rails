@@ -27,6 +27,7 @@ class GamesController < ApplicationController
     @player_cards = Card.where(player_id: @game.players.first.id)
     @opponent_cards = Card.where(player_id: @game.players.last.id)
     @draw_pile = Card.where(player_id: 0)
+    @draw_card = Card.where(player_id: -2)
   end
 
   def reset

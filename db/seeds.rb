@@ -34,7 +34,7 @@ end
 
 red_specials.each do |card|
   if card.last == "d"
-    Card.create(card_type: "special", color: "red", card_action: "draw_two", player_id: 0)
+    Card.create(card_type: "special", color: "red", card_action: "draw", player_id: 0)
   elsif card.last == "s"
     Card.create(card_type: "special", color: "red", card_action: "skip", player_id: 0)
   else
@@ -44,7 +44,7 @@ end
 
 blue_specials.each do |card|
   if card.last == "d"
-    Card.create(card_type: "special", color: "blue", card_action: "draw_two", player_id: 0)
+    Card.create(card_type: "special", color: "blue", card_action: "draw", player_id: 0)
   elsif card.last == "s"
     Card.create(card_type: "special", color: "blue", card_action: "skip", player_id: 0)
   else
@@ -54,7 +54,7 @@ end
 
 green_specials.each do |card|
   if card.last == "d"
-    Card.create(card_type: "special", color: "green", card_action: "draw_two", player_id: 0)
+    Card.create(card_type: "special", color: "green", card_action: "draw", player_id: 0)
   elsif card.last == "s"
     Card.create(card_type: "special", color: "green", card_action: "skip", player_id: 0)
   else
@@ -64,7 +64,7 @@ end
 
 yellow_specials.each do |card|
   if card.last == "d"
-    Card.create(card_type: "special", color: "yellow", card_action: "draw_two", player_id: 0)
+    Card.create(card_type: "special", color: "yellow", card_action: "draw", player_id: 0)
   elsif card.last == "s"
     Card.create(card_type: "special", color: "yellow", card_action: "skip", player_id: 0)
   else
