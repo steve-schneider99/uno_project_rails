@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root :to => 'games#index'
 
-  resources :cards
+  resources :cards do
+    member do
+      get 'draw', to: 'cards#draw'
+    end
+  end
 
   resources :games do
     resources :players

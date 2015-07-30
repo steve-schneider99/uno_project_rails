@@ -14,4 +14,8 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def opponent_turn
+
+  end
+
 end

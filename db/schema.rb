@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20150728220922) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "current_turn"
-    t.string "draw_pile_remaining"
-    t.string "draw_pile_card"
-    t.string "player_name"
+    t.integer "current_turn"
+    t.string  "draw_pile_remaining"
+    t.string  "draw_pile_card"
+    t.string  "player_name"
   end
 
   create_table "players", force: :cascade do |t|

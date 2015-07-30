@@ -23,6 +23,7 @@
         <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
       <% end %>
     <% end %>
+    <%= link_to image_tag("unoBack.jpeg", size: '50x80'), draw_card_path %>
   </div>
   <div class="col-sm-4">
     <h3>Player Vals</h3>
@@ -39,20 +40,22 @@
 
 <h3>Card Vals</h3>
 <p>Draw Pile Cards<i>(should be same as game value above)</i>: <%= @draw_pile.length %></p>
+<p>Discard Pile Cards: <%= @discard_pile.length %></p>
 <br>
 <div class="row">
   <div class="col-sm-6">
-    <i>Player Cards</i>
+    <i>Player Cards | Total: <%= @player_cards.length %></i>
     <% if @player_cards.any? %>
       <ul>
         <% @player_cards.each do |card| %>
           <% if card.card_type == "number" %>
             <li><%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
             <!-- <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li> -->
-          <% else %>
-            <li><%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
-            <!-- <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li> -->
-          <% end %>
+            <% elsif card.card_type == "special" %>
+              <li><%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
+            <% else %>
+              <li><%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
+            <% end %>
           <% if card.color == @draw_card.first.color || card.number == @draw_card.first.number || card.card_action != nil && card.card_action == @draw_card.first.card_action %>
             <%= link_to "Play", card_path(card), :method => :put %>
           <% end %>
@@ -64,7 +67,7 @@
   </div>
 
   <div class="col-sm-6">
-    <i>Opponent Cards</i>
+    <i>Opponent Cards | Total: <%= @opponent_cards.length %></i>
     <% if @opponent_cards.any? %>
       <ul>
         <% @opponent_cards.each do |card| %>

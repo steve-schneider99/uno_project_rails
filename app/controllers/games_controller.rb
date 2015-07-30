@@ -10,11 +10,10 @@ class GamesController < ApplicationController
 
   def create
     player_name = params[:game].first.at(1)
-    @game = Game.new(game_params)
-    @game.current_turn = player_name
-    @game.save
+    @game = Game.create(game_params)
     player = @game.players.create(player_name: player_name).assign_cards
     opponent = @game.players.create(player_name: "opponent").assign_cards
+    @game.current_turn = Player.where(player_name: player_name).first
     @game.set_draw_pile
     @game.draw_pile_remaining = Card.where(player_id: 0).length
     @game.save
@@ -28,6 +27,7 @@ class GamesController < ApplicationController
     @opponent_cards = Card.where(player_id: @game.players.last.id)
     @draw_pile = Card.where(player_id: 0)
     @draw_card = Card.where(player_id: -2)
+    @discard_pile = Card.where(player_id: -1)
   end
 
   def reset
