@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     @game = Game.create(game_params)
     player = @game.players.create(player_name: player_name).assign_cards
     opponent = @game.players.create(player_name: "opponent").assign_cards
-    @game.current_turn = Player.where(player_name: player_name).first
+    @game.current_turn = @game.players.first.id
     @game.set_draw_pile
     @game.draw_pile_remaining = Card.where(player_id: 0).length
     @game.save
@@ -22,6 +22,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @current_turn = Player.find(@game.current_turn)
     @players = @game.players
     @player_cards = Card.where(player_id: @game.players.first.id)
     @opponent_cards = Card.where(player_id: @game.players.last.id)
