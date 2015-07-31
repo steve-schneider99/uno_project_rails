@@ -14,6 +14,7 @@ group :production do
   gem 'bootswatch-rails'
   gem 'bootstrap_form'
   gem 'pry'
+  gem 'rails12_factor'
 end
 
 
