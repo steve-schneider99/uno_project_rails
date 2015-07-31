@@ -6,13 +6,13 @@
     <br>
     <% if @opponent_cards.any? %>
         <% @opponent_cards.each do |card| %>
-          <% if card.card_type == "number" %>
-            <%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
-            <!-- <li>Card Type: <%= card.card_type %> | Card Number: <%= card.number %> | Card Color: <%= card.color %></li> -->
-          <% else %>
-            <%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
-            <!-- <li>Card Type: <%= card.card_type %> | Card Action: <%= card.card_action %> | Card Color: <%= card.color %></li> -->
-          <% end %>
+        <% if card.card_type == "number" %>
+          <%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
+        <% elsif card.card_type == "special" %>
+          <%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
+        <% else %>
+          <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
+        <% end %>
         <% end %>
     <% end %>
   </div>
