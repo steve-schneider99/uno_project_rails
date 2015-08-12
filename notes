@@ -13,7 +13,7 @@ In-game complete list:
   - card will be removed from player hand(change player_id) and changed to draw_pile_card.
   - current draw_pile_card will be changed to discard pile.
   - current_turn will change to opponent.
-
+//done!
  2. Create special card functions: draw two, skip, reverse(skip and reverse will have the same code until multiple players can be added.)
   - playing any of these special cards will skip the turn of the opponent.
   - in addition to the skip action, draw two will also add two random draw pile cards to opponent.
@@ -26,9 +26,10 @@ In-game complete list:
     - Create method to determine if the player is a winner(player.winner? method).
   - Create redirect based on winner("Game Over! __ is the winner!")
   - Maybe make some button to click if Uno is applicable(this is on the backburner).
-  
 
-
+*BUGS*
+1. If draw card is special card, currently able to play another special card on top of it that is NOT the same color.
+2. Some skips look like zero cards..
 
 //done!
 Player cards will be an array. Initial game setup may have randomized elements for the 7 cards, but should have 4-5 number cards, 2 special cards.

@@ -19,12 +19,14 @@ class CardsController < ApplicationController
     #perform special card actions
     if player_card.card_action != nil
       if player_card.card_action === "skip" || player_card.card_action === "reverse"
+        flash[:notice] = "Opponent was skipped! " + player_card.color + " " + player_card.card_action + " was played."
       elsif player_card.card_action === "draw"
         draw_two = Card.where(player_id: 0).sample(2)
         draw_two.each do |card|
           card.player_id = opponent.id
           card.save
         end
+        flash[:notice] = "Opponent was skipped! " + player_card.color + " " + player_card.card_action + " was played."
       else
       end
       redirect_to game_path(game)
