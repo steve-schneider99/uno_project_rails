@@ -1,21 +1,39 @@
-player_id column on Card objects tells what that currently belongs to.
+player_id column on Card objects tells what that card currently belongs to.
  - number = the id of the player for that game. Card is in the player's hand.
  - number + 1 = the id of the computer opponent for that game. Card is in the opponent's hand.
  - -0 = draw pile id. The card is currently in the draw pile.
  - -1 = discard pile id. The card has been discarded and is not the current face up card.
-  - -2 = the current face up card. Is changed to -1 once a card moves from the draw pile to the current face up card.
+ - -2 = the current face up card. Is changed to -1 once a card moves from the draw pile to the current face up card.
+
 
 In-game complete list:
+//done!
  1. Create buttons to allow player to play a card(maybe set button to show only if the card is an option based on what the draw_pile_card currently is).
   - card must match either number or color, or be a wild card(wilds implemented later)
   - card will be removed from player hand(change player_id) and changed to draw_pile_card.
   - current draw_pile_card will be changed to discard pile.
   - current_turn will change to opponent.
 
+ 2. Create special card functions: draw two, skip, reverse(skip and reverse will have the same code until multiple players can be added.)
+  - playing any of these special cards will skip the turn of the opponent.
+  - in addition to the skip action, draw two will also add two random draw pile cards to opponent.
+
+ 3. Create wild card functions: wild and draw_four_wild.
+  - wild effect will change the color of the card playable on the draw pile, create an alert that has multiple button choices for color.
+
+ 4. End-of-Game - Uno announcement and Winner announcement
+  - Create logic to determine if game is over based on how many cards remaining in the player hand. Probably run this right after the card is played from a hand to make sure the game doesn't continue.
+    - Create method to determine if the player is a winner(player.winner? method).
+  - Create redirect based on winner("Game Over! __ is the winner!")
+  - Maybe make some button to click if Uno is applicable(this is on the backburner).
+  
 
 
+
+//done!
 Player cards will be an array. Initial game setup may have randomized elements for the 7 cards, but should have 4-5 number cards, 2 special cards.
 
+//done!
 New Game:
 1. Load the arrays for deck cards.
 2. For the player, pick 5 number cards and 2 special cards. Push these cards into player cards array, remove them from the arrays they originated from.

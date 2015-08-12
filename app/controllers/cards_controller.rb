@@ -24,6 +24,7 @@ class CardsController < ApplicationController
       game.current_turn = player.id
       game.save
     end
+    # process the opponent's turn
     opponent.opponent_turn
     redirect_to game_path(game)
   end

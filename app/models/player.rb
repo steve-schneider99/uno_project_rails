@@ -35,7 +35,7 @@ class Player < ActiveRecord::Base
       draw_card.player_id = -1
       draw_card.save
 
-      #set player card to be the new draw pile card
+      #determines card to be played, sets card to be the new draw pile card
       selected_card = possible_plays.sample
       selected_card.player_id = -2
       selected_card.save

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-group :production do
   gem 'rails', '4.2.3'
   gem 'pg'
   gem 'sass-rails'
@@ -15,7 +14,7 @@ group :production do
   gem 'bootstrap_form'
   gem 'pry'
   gem 'rails_12factor'
-end
+
 
 
 group :development, :test do

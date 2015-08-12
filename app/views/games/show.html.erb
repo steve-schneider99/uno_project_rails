@@ -5,7 +5,7 @@
     <i>Opponent Cards | Total: <%= @opponent_cards.length %></i>
     <br>
     <% if @opponent_cards.any? %>
-        <% @opponent_cards.each do |card| %>
+      <% @opponent_cards.each do |card| %>
         <% if card.card_type == "number" %>
           <%= image_tag(card.color + card.number.to_s + '.jpeg', size: '50x80') %>
         <% elsif card.card_type == "special" %>
@@ -13,7 +13,7 @@
         <% else %>
           <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
         <% end %>
-        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -77,7 +77,7 @@
             <% end %>
           <% else %>
             <% if card.color == @draw_card.first.color || card.number == @draw_card.first.number || card.card_action != nil && card.card_action == @draw_card.first.card_action %>
-              <%= link_to image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80'), card_path(card), :method => :pit %>
+              <%= link_to image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80'), card_path(card), :method => :put %>
             <% else %>
               <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
             <% end %>
