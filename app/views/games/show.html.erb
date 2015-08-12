@@ -25,6 +25,7 @@
     <p>Discard Pile Cards: <%= @discard_pile.length %></p>
     <br>
   </div>
+
   <div class="col-sm-3">
     <h3>Draw Pile Card</h3>
     <% @draw_card.each do |card| %>
@@ -38,12 +39,14 @@
     <% end %>
     <%= link_to image_tag("unoBack.jpeg", size: '50x80'), draw_card_path %>
   </div>
+
   <div class="col-sm-3">
     <h3>Game Vals</h3>
     Player Name: <%= @game.player_name %>
     <br>
     Current Turn: <%= @current_turn.player_name %>
   </div>
+
   <div class="col-sm-3">
     <h3>Player Vals</h3>
     <% if @players.any? %>

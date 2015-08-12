@@ -16,17 +16,31 @@ class CardsController < ApplicationController
     player_card.player_id = -2
     player_card.save
 
-    #change the current turn value
-    if game.current_turn == player.id
-      game.current_turn = opponent.id
-      game.save
+    #perform special card actions
+    if player_card.card_action != nil
+      if player_card.card_action === "skip" || player_card.card_action === "reverse"
+      elsif player_card.card_action === "draw"
+        draw_two = Card.where(player_id: 0).sample(2)
+        draw_two.each do |card|
+          card.player_id = opponent.id
+          card.save
+        end
+      else
+      end
+      redirect_to game_path(game)
     else
-      game.current_turn = player.id
-      game.save
+      #change the current turn value
+      if game.current_turn == player.id
+        game.current_turn = opponent.id
+        game.save
+      else
+        game.current_turn = player.id
+        game.save
+      end
+      # process the opponent's turn
+      opponent.opponent_turn
+      redirect_to game_path(game)
     end
-    # process the opponent's turn
-    opponent.opponent_turn
-    redirect_to game_path(game)
   end
 
   # When a card is drawn from the draw pile

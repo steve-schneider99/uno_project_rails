@@ -23,7 +23,7 @@ class Player < ActiveRecord::Base
     opponent_cards = Card.where(player_id: self.id)
     possible_plays = []
 
-    #determine elgibile cards in hand.
+    #determine eligible cards in hand.
     opponent_cards.each do |card|
       if card.color == draw_card.color || card.number == draw_card.number || card.card_action != nil && card.card_action == draw_card.card_action
         possible_plays.push(card)
@@ -40,15 +40,30 @@ class Player < ActiveRecord::Base
       selected_card.player_id = -2
       selected_card.save
 
-      #switches current turn once card has been selected and played
-      if game.current_turn == self.id
-        game.current_turn = player.id
-        game.save
+      #determines if card has special action, and executes action if it does.
+      if selected_card.card_action != nil
+        if selected_card.card_action === "skip" || selected_card.card_action === "reverse"
+        elsif selected_card.card_action === "draw"
+          draw_two = Card.where(player_id: 0).sample(2)
+          draw_two.each do |card|
+            card.player_id = game.players.first.id
+            card.save
+          end
+        else
+        end
+        self.opponent_turn
       else
-        game.current_turn = self.id
-        game.save
+        #switches current turn once card has been selected and played
+        if game.current_turn == self.id
+          game.current_turn = player.id
+          game.save
+        else
+          game.current_turn = self.id
+          game.save
+        end
       end
     else
+      #draws a card from the draw pile and repeats opponent_turn process.
       drawn_card = Card.where(player_id: 0).sample
       drawn_card.player_id = self.id
       drawn_card.save
