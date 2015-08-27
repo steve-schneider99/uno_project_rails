@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :cards do
     member do
       get 'draw', to: 'cards#draw'
+      get 'color', to: 'cards#color'
     end
   end
 

@@ -54,7 +54,7 @@ class Player < ActiveRecord::Base
         self.opponent_turn
       else
         #switches current turn once card has been selected and played
-        if game.current_turn == self.id
+        if game.current_turn = self.id
           game.current_turn = player.id
           game.save
         else

@@ -6,6 +6,8 @@ player_id column on Card objects tells what that card currently belongs to.
  - -2 = the current face up card. Is changed to -1 once a card moves from the draw pile to the current face up card.
 
 
+ <%= link_to "Modal Test", game_path(@game), data: { toggle: "modal", target: "#{ajax-modal}" } %>
+
 In-game complete list:
 //done!
  1. Create buttons to allow player to play a card(maybe set button to show only if the card is an option based on what the draw_pile_card currently is).

@@ -1,0 +1,13 @@
+<h2>You played a wild! Choose your color: </h2>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>
+      <%= link_to "Blue", color_card_path(@card, "blue") %> |
+      <%= link_to "Yellow", color_card_path(@card, "yellow") %> |
+      <%= link_to "Green", color_card_path(@card, "green") %> |
+      <%= link_to "Red", color_card_path(@card, "red") %> |
+    </h3>
+  </div>
+</div>
