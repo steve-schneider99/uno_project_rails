@@ -1,12 +1,10 @@
 player_id column on Card objects tells what that card currently belongs to.
  - number = the id of the player for that game. Card is in the player's hand.
  - number + 1 = the id of the computer opponent for that game. Card is in the opponent's hand.
- - -0 = draw pile id. The card is currently in the draw pile.
+ - -0 = draw pile id. The card is currently face down in the draw pile.
  - -1 = discard pile id. The card has been discarded and is not the current face up card.
- - -2 = the current face up card. Is changed to -1 once a card moves from the draw pile to the current face up card.
+ - -2 = the current face up card on the draw pile. Is changed to -1 once a card moves from the draw pile to the current face up card.
 
-
- <%= link_to "Modal Test", game_path(@game), data: { toggle: "modal", target: "#{ajax-modal}" } %>
 
 In-game complete list:
 //done!
@@ -32,6 +30,8 @@ In-game complete list:
 *BUGS*
 1. If draw card is special card, currently able to play another special card on top of it that is NOT the same color.
 2. Some skips look like zero cards..
+3. Starting card is wild and not set to a color. Should prevent wild card being first draw card.
+4. Crashes when trying to draw from draw_pile at 0.
 
 //done!
 Player cards will be an array. Initial game setup may have randomized elements for the 7 cards, but should have 4-5 number cards, 2 special cards.

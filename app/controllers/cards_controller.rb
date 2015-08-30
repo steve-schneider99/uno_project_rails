@@ -6,15 +6,13 @@ class CardsController < ApplicationController
     player = Player.find(player_card.player_id)
     opponent = Player.find(player_card.player_id + 1)
     game = Game.find(player.game_id)
-    current_draw = Card.where(player_id: -2)
+    current_draw = Card.where(player_id: -2).first
 
     #discard current draw pile card
-    current_draw.first.player_id = -1
-    current_draw.first.save
+    current_draw.discard_draw
 
     #set player card to be the new draw pile card
-    player_card.player_id = -2
-    player_card.save
+    player_card.place_draw
 
     #perform special card actions
     if player_card.card_action != nil
@@ -27,14 +25,15 @@ class CardsController < ApplicationController
           card.save
         end
         flash[:notice] = "Opponent was skipped! " + player_card.color + " " + player_card.card_action + " was played."
-      elsif player_card.card_action === "draw_four"
-        draw_four = Card.where(player_id: 0).sample(4)
-        draw_four.each do |card|
-          card.player_id = opponent.id
-          card.save
-        end
-      elsif player_card.card_action === "wild_color"
-
+      # elsif player_card.card_action === "draw_four"
+      #   draw_four = Card.where(player_id: 0).sample(4)
+      #   draw_four.each do |card|
+      #     card.player_id = opponent.id
+      #     card.save
+      #   end
+      # elsif player_card.card_action === "wild_color"
+      #   opponent.opponent_turn
+      #   redirect_to game_path(game)
       end
       redirect_to game_path(game)
     else
@@ -75,11 +74,18 @@ class CardsController < ApplicationController
   end
 
   def color
-    binding.pry
     color = params[:format]
     card = Card.find(params[:id])
     player = Player.find(card.player_id)
     game = Game.find(player.game_id)
+    opponent = Player.find(card.player_id + 1)
+    current_draw = Card.where(player_id: -2).first
+
+    current_draw.discard_draw
+    card.color = color
+    card.place_draw
+
+    opponent.opponent_turn
     redirect_to game_path(game)
   end
 end

@@ -79,11 +79,7 @@
               <%= image_tag(card.color + card.card_action + '.jpeg', size: '50x80') %>
             <% end %>
           <% elsif card.card_type == "wild" %>
-            <!-- <% if card.color == @draw_card.first.color || card.number == @draw_card.first.number || card.card_action != nil && card.card_action == @draw_card.first.card_action %> -->
               <%= link_to image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80'), card_path(card) %>
-            <% else %>
-              <%= image_tag(card.card_type + card.card_action + '.jpeg', size: '50x80') %>
-            <% end %>
           <% end %>
         <% end %>
     <% end %>
