@@ -22,10 +22,11 @@ class Player < ActiveRecord::Base
     draw_card = Card.where(player_id: -2).first
     opponent_cards = Card.where(player_id: self.id)
     possible_plays = []
+    colors = ["blue", "green", "red", "yellow"]
 
     #determine eligible cards in hand.
     opponent_cards.each do |card|
-      if card.color == draw_card.color || card.number == draw_card.number || card.card_action != nil && card.card_action == draw_card.card_action
+      if card.color == draw_card.color || card.number == draw_card.number || (card.card_action != nil && card.card_action == draw_card.card_action)
         possible_plays.push(card)
       end
     end
@@ -42,16 +43,28 @@ class Player < ActiveRecord::Base
 
       #determines if card has special action, and executes action if it does.
       if selected_card.card_action != nil
+
         if selected_card.card_action === "skip" || selected_card.card_action === "reverse"
+          self.opponent_turn
         elsif selected_card.card_action === "draw"
           draw_two = Card.where(player_id: 0).sample(2)
           draw_two.each do |card|
             card.player_id = game.players.first.id
             card.save
           end
-        else
+          self.opponent_turn
+        elsif selected_card.card_action === "wild_color"
+          selected_card.color = colors.sample
+          selected_card.save
+        elsif selected_card.card_action === "draw_four"
+          draw_four = Card.where(player_id: 0).sample(4)
+          draw_four.each do |card|
+            card.player_id = player.id
+            card.save
+          end
+          self.opponent_turn
         end
-        self.opponent_turn
+
       else
         #switches current turn once card has been selected and played
         if game.current_turn = self.id
@@ -61,7 +74,9 @@ class Player < ActiveRecord::Base
           game.current_turn = self.id
           game.save
         end
+
       end
+
     else
       #draws a card from the draw pile and repeats opponent_turn process.
       drawn_card = Card.where(player_id: 0).sample

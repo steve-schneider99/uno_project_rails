@@ -74,6 +74,7 @@ class CardsController < ApplicationController
 
     current_draw.discard_draw
     card.color = color
+    card.save
     card.place_draw
 
     if card.card_action === "draw_four"
