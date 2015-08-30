@@ -25,15 +25,6 @@ class CardsController < ApplicationController
           card.save
         end
         flash[:notice] = "Opponent was skipped! " + player_card.color + " " + player_card.card_action + " was played."
-      # elsif player_card.card_action === "draw_four"
-      #   draw_four = Card.where(player_id: 0).sample(4)
-      #   draw_four.each do |card|
-      #     card.player_id = opponent.id
-      #     card.save
-      #   end
-      # elsif player_card.card_action === "wild_color"
-      #   opponent.opponent_turn
-      #   redirect_to game_path(game)
       end
       redirect_to game_path(game)
     else
@@ -85,7 +76,16 @@ class CardsController < ApplicationController
     card.color = color
     card.place_draw
 
-    opponent.opponent_turn
-    redirect_to game_path(game)
+    if card.card_action === "draw_four"
+      draw_four = Card.where(player_id: 0).sample(4)
+      draw_four.each do |card|
+        card.player_id = opponent.id
+        card.save
+      end
+      redirect_to game_path(game)
+    else
+      opponent.opponent_turn
+      redirect_to game_path(game)
+    end
   end
 end
