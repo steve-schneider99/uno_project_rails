@@ -6,6 +6,7 @@ class Game < ActiveRecord::Base
     opponent_cards = Card.where(player_id: self.players.last.id)
     draw_pile_card = Card.where(player_id: -2)
     discard_pile = Card.where(player_id: -1)
+    wild_cards = Card.where(card_type: "wild")
 
     draw_pile_card.each do |card|
       card.player_id = 0
@@ -21,6 +22,10 @@ class Game < ActiveRecord::Base
     end
     discard_pile.each do |card|
       card.player_id = 0
+      card.save
+    end
+    wild_cards.each do |card|
+      card.color = ""
       card.save
     end
   end
