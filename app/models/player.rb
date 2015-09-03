@@ -53,9 +53,6 @@ class Player < ActiveRecord::Base
             card.save
           end
           self.opponent_turn
-        elsif selected_card.card_action === "wild_color"
-          selected_card.color = colors.sample
-          selected_card.save
         elsif selected_card.card_action === "draw_four"
           draw_four = Card.where(player_id: 0).sample(4)
           draw_four.each do |card|
@@ -63,6 +60,9 @@ class Player < ActiveRecord::Base
             card.save
           end
           self.opponent_turn
+        elsif selected_card.card_action === "wild_color"
+          selected_card.color = colors.sample
+          selected_card.save
         end
 
       else
