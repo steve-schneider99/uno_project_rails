@@ -1,28 +1,18 @@
-== README
+==Uno Mas - Recreating the game Uno
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Uno Mas was an attempt at recreating the classic card game Uno in digital form with a computer opponent fully designed with logic. The final form is intended to be fully playable, styled, and with the inclusion of multiple players/computer opponents.
 
-Things you may want to cover:
+I chose to use a database for all card details, which worked really well for a single game once I worked out the details. While it's nowhere near the most graceful way to handle it, it was a good experience for me to see how to put something like this into implementation. One challenge I recognize on a larger scale would be responsiveness; database queries and changes can range from as little as 5 times per action to potentially much more. 
 
-* Ruby version
+I think what I enjoyed most about this project was determining the logic for the computer opponent. I found that it was much easier to present all the options for a player to be able to choose for their turn, it's much more challenging to create the logic for a computer to decide with all of those options. I found the selection process a little tricky for wild card color choices, specifically how to implement it in the project's current state. I ended up taking the route of navigating to a new page for the player to choose the option, but would prefer down the road to be able to have a pop-up dialog box instead of leaving the page.
 
-* System dependencies
+Installation Instructions:
+* Clone the respository to your desktop
+* Run 'bundle install' to install gems
+* Run 'rake db:setup' to create the card database
+* Naviagate in your broswer to 'localhost:3000' to access the main page
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Still needs to be completed:
+* Adding additional players/computer opponents to a game
+* Responsiveness to end-of-game state as well as a single card remaining
+* Styling and bug fixes
